@@ -1,0 +1,52 @@
+﻿
+@page "/upsert"
+@page "/upsert/{id}" 
+
+@inject IEngineerService engineerService;
+
+@using Microsoft.AspNetCore.Components.Forms;
+
+@using BlazorServerCosmoDBDemo.Data;
+
+@inject NavigationManager NavManager
+
+<h3>Upsert Engineer</h3>
+<EditForm Model="@engineer">
+    <div class="form-group row p-2">
+        <input type="hidden" @bind-Value="engineer.Id" />
+        <div class="col-md-6">
+            <input type="text" class="form-control" placeholder="Name" @bind-Value = "engineer.Name"/>
+
+        </div>
+
+        <div class="mol-md-6">
+            <input type="text" class="form-control" placeholder="Specialty" @bind-Value="engineer. Specialty"/>
+        </div>
+    </div>
+</EditForm>
+
+<!--At this section I am going to write c# code to generate the functions and instances-->
+@code{
+    Engineer engineer = new();
+
+    [Parameter]
+    public string ? id { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+
+        if (!string.IsNullOrEmpty(id))
+        {
+            engineer = await engineerService.GetEngineerDetailsById(id, id);
+        }    
+    }
+
+    private async Task SaveEngineer()
+    {
+        await engineerService.UpsertEngineer(engineer);
+        NavManager.NavigateTo("/");
+    }
+
+
+}
+

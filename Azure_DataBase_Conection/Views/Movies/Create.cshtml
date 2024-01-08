@@ -1,0 +1,28 @@
+﻿@model Movies
+@{
+    
+    @ViewData["Title"] = "Create"
+}
+
+<title>Movies Add</title>
+
+<form asp-action="Create">
+
+    <div class="MovieName">
+        <label asp-for="Name"  class="form-control">Name : </label>
+        <input asp-for="Name" class="form-control"/>
+    </div>
+     <div class="Genre">
+        <label asp-for="Genre"  class="form-control">Genre : </label>
+        <input asp-for="Genre" class="form-control"/>
+    </div>
+    <div class="Duration">
+        <label asp-for="Duration" class="form-control">Genre : </label>
+        <Input asp-for="Duration" class="form-control" />
+    </div>
+
+    <button type="submit" class="create"> Create </button>
+
+</form>
+
+
